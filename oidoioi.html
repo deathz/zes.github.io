@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 7: Environmental Protection - Test 01</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --success-color: #10b981;
+            --error-color: #ef4444;
+            --bg-color: #f3f4f6;
+            --card-bg: #ffffff;
+            --text-color: #1f2937;
+            --border-color: #e5e7eb;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            color: #4b5563;
+            margin-top: 10px;
+        }
+
+        .section-title {
+            background-color: #dbeafe;
+            color: #1e40af;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-weight: bold;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .question-card {
+            margin-bottom: 25px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: #fff;
+            transition: transform 0.2s;
+        }
+
+        .question-card:hover {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+        }
+
+        .reading-passage {
+            background-color: #f8fafc;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            white-space: pre-wrap;
+            line-height: 1.7;
+            text-align: justify;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .option-label:hover {
+            background-color: #f9fafb;
+            border-color: #9ca3af;
+        }
+
+        .option-input {
+            margin-right: 12px;
+            transform: scale(1.2);
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            filter: brightness(110%);
+        }
+
+        .explanation {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #ecfdf5;
+            border: 1px solid #a7f3d0;
+            border-radius: 8px;
+            display: none;
+            font-size: 0.95rem;
+        }
+
+        .explanation strong {
+            color: #065f46;
+        }
+
+        .correct-answer {
+            border-color: var(--success-color) !important;
+            background-color: #ecfdf5 !important;
+        }
+
+        .wrong-answer {
+            border-color: var(--error-color) !important;
+            background-color: #fef2f2 !important;
+        }
+
+        /* Sign styles */
+        .sign-box {
+            border: 4px solid black;
+            border-radius: 10px;
+            padding: 10px;
+            width: fit-content;
+            background: #333;
+            color: white;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        .sign-title { color: white; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+        .sign-body { background: yellow; color: black; font-weight: 900; font-size: 1.2rem; padding: 10px; margin-top: 5px; text-transform: uppercase; text-align: center; }
+        
+        .notice-box {
+            border: 2px solid blue;
+            background: #fff9c4;
+            padding: 15px;
+            width: fit-content;
+            margin-bottom: 15px;
+            box-shadow: 3px 3px 5px rgba(0,0,0,0.2);
+            font-family: serif;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        #submit-bar {
+            position: sticky;
+            bottom: 0;
+            background: white;
+            padding: 20px;
+            border-top: 2px solid #e5e7eb;
+            text-align: center;
+            box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+            z-index: 100;
+        }
+
+        #submit-btn {
+            font-size: 1.2rem;
+            padding: 12px 40px;
+            background-color: #059669;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+        }
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+        }
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+        
+        u { text-decoration: underline; text-underline-offset: 3px; }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>ENGLISH TEST - UNIT 7</h1>
+        <h2>Environmental Protection</h2>
+        <p>Complete all 40 questions below.</p>
+    </header>
+
+    <div id="quiz-container">
+        </div>
+</div>
+
+<div id="submit-bar">
+    <button id="submit-btn" class="btn" onclick="submitAll()">NỘP BÀI (SUBMIT ALL)</button>
+</div>
+
+<div id="resultModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <h2>Kết Quả Bài Làm</h2>
+        <div class="score-circle" id="score-display">0/40</div>
+        <p id="score-message"></p>
+        <button class="btn" onclick="closeModal()">Xem chi tiết</button>
+    </div>
+</div>
+
+<script>
+    // Data Structure for the Quiz
+    const quizData = [
+        // PRONUNCIATION
+        {
+            id: 1,
+            section: "Mark the letter A, B, C or D to indicate the word whose underlined part differs from the other three in pronunciation.",
+            question: "Choose the word whose underlined part (e) is pronounced differently:",
+            options: { A: "proc<u>e</u>ss", B: "for<u>e</u>st", C: "r<u>e</u>duce", D: "r<u>e</u>cycle" },
+            correct: "A",
+            explanation: "<strong>Đáp án A (/e/ vs /ɪ/)</strong><br>A. Process /ˈprəʊs<strong>e</strong>s/ (âm e)<br>B. Forest /ˈfɒr<strong>ɪ</strong>st/ (âm i ngắn)<br>C. Reduce /r<strong>ɪ</strong>ˈdjuːs/ (âm i ngắn)<br>D. Recycle /r<strong>ɪ</strong>ˈsaɪkl/ (âm i ngắn)<br><em>Lưu ý: Một số từ điển có thể phiên âm process là /prəʊses/, nhưng trong bài thi phổ thông, sự khác biệt thường nằm ở âm /e/ rõ so với âm /ɪ/ yếu ở các từ còn lại.</em>"
+        },
+        {
+            id: 2,
+            section: "Mark the letter A, B, C or D to indicate the word whose underlined part differs from the other three in pronunciation.",
+            question: "Choose the word whose underlined part (s) is pronounced differently:",
+            options: { A: "re<u>s</u>ident", B: "con<u>s</u>ume", C: "<u>s</u>ocial", D: "con<u>s</u>erve" },
+            correct: "A",
+            explanation: "<strong>Đáp án A (/z/ vs /s/)</strong><br>A. Resident /ˈrezɪdənt/ (âm /z/)<br>B. Consume /kənˈsuːm/ (âm /s/)<br>C. Social /ˈsəʊʃl/ (âm /s/)<br>D. Conserve /kənˈsɜːv/ (âm /s/)<br><em>Giải thích: 's' kẹp giữa 2 nguyên âm thường đọc là /z/ (resident), còn lại đọc là /s/.</em>"
+        },
+        // STRESS
+        {
+            id: 3,
+            section: "Mark the letter A, B, C or D to indicate the word that differs from the other three in the position of primary stress.",
+            question: "Choose the word with different stress pattern:",
+            options: { A: "destroy", B: "contain", C: "include", D: "coral" },
+            correct: "D",
+            explanation: "<strong>Đáp án D (Âm 1 vs Âm 2)</strong><br>A. destroy /dɪˈstrɔɪ/ (nhấn âm 2)<br>B. contain /kənˈteɪn/ (nhấn âm 2)<br>C. include /ɪnˈkluːd/ (nhấn âm 2)<br>D. coral /ˈkɒrəl/ (nhấn âm 1)<br><em>Quy tắc: Động từ 2 âm tiết thường nhấn âm 2, danh từ 2 âm tiết (coral) thường nhấn âm 1.</em>"
+        },
+        {
+            id: 4,
+            section: "Mark the letter A, B, C or D to indicate the word that differs from the other three in the position of primary stress.",
+            question: "Choose the word with different stress pattern:",
+            options: { A: "protection", B: "interest", C: "discussion", D: "commitment" },
+            correct: "B",
+            explanation: "<strong>Đáp án B (Âm 1 vs Âm 2)</strong><br>A. protection /prəˈtekʃn/ (nhấn âm 2 - trước suffix -tion)<br>B. interest /ˈɪntrəst/ (nhấn âm 1)<br>C. discussion /dɪˈskʌʃn/ (nhấn âm 2)<br>D. commitment /kəˈmɪtmənt/ (nhấn âm 2)<br><em>Lưu ý: 'Interest' là danh từ ngoại lệ nhấn âm 1.</em>"
+        },
+        // VOCABULARY & GRAMMAR
+        {
+            id: 5,
+            section: "Mark the letter A, B, C or D to indicate the correct answer to each of the following questions.",
+            question: "Human shouldn’t dump the rubbish into the river to reduce ________ pollution.",
+            options: { A: "Air", B: "water", C: "carbon", D: "soil" },
+            correct: "B",
+            explanation: "<strong>Đáp án B (water pollution)</strong><br>Dịch: Con người không nên đổ rác xuống sông để giảm ô nhiễm nước.<br>Từ khóa: 'rubbish into the river' (rác xuống sông) -> liên quan đến 'water' (nước)."
+        },
+        {
+            id: 6,
+            section: "",
+            question: "Students should learn how to ________ their carbon footprint to protect the environment.",
+            options: { A: "Pollute", B: "protect", C: "reduce", D: "recycle" },
+            correct: "C",
+            explanation: "<strong>Đáp án C (reduce)</strong><br>Collocation: <strong>reduce carbon footprint</strong> (giảm lượng khí thải carbon).<br>A. Pollute (làm ô nhiễm) - sai nghĩa.<br>B. Protect (bảo vệ) - không đi với footprint.<br>D. Recycle (tái chế) - không dùng cho footprint."
+        },
+        {
+            id: 7,
+            section: "",
+            question: "Picking ___ and planting trees to protect nature and environment are activities suitable for children.",
+            options: { A: "about", B: "down", C: "up", D: "in" },
+            correct: "C",
+            explanation: "<strong>Đáp án C (pick up)</strong><br>Phrasal verb: <strong>Pick up litter/trash</strong> (nhặt rác).<br>Dịch: Nhặt rác và trồng cây... là hoạt động phù hợp cho trẻ em."
+        },
+        {
+            id: 8,
+            section: "",
+            question: "Let’s play with the children ________ it is time to go.",
+            options: { A: "While", B: "until", C: "after", D: "before" },
+            correct: "D",
+            explanation: "<strong>Đáp án D (before)</strong><br>Dịch: Hãy chơi với bọn trẻ <strong>trước khi</strong> đến giờ phải đi.<br>B. until (cho đến khi) - ngữ cảnh này 'trước khi đi' hợp lý hơn."
+        },
+        {
+            id: 9,
+            section: "",
+            question: "Coal power stations release sulfur dioxide _________ the atmosphere.",
+            options: { A: "Into", B: "up", C: "on", D: "in" },
+            correct: "A",
+            explanation: "<strong>Đáp án A (into)</strong><br>Cấu trúc: <strong>release sth into sth</strong> (thải cái gì vào cái gì).<br>Dịch: Nhà máy nhiệt điện than thải khí SO2 vào bầu khí quyển."
+        },
+        {
+            id: 10,
+            section: "",
+            question: "“We need to protect our oceans by reducing plastic waste!” – “ _______”",
+            options: { A: "I can’t agree with you more", B: "There is no point", C: "Thank you", D: "You’re such an intelligent girl!" },
+            correct: "A",
+            explanation: "<strong>Đáp án A (Đồng ý hoàn toàn)</strong><br>“I can’t agree with you more” = I totally agree (Tôi hoàn toàn đồng ý).<br>Bối cảnh: Đưa ra quan điểm bảo vệ môi trường -> Đáp lại bằng sự đồng tình."
+        },
+        {
+            id: 11,
+            section: "",
+            question: "We should save energy by using ________ appliances and adopting sustainable practices.",
+            options: { A: "energy-efficient", B: "energy-consuming", C: "energy-costing", D: "energy-saved" },
+            correct: "A",
+            explanation: "<strong>Đáp án A (energy-efficient)</strong><br>Compound Adjective: <strong>energy-efficient</strong> (tiết kiệm năng lượng, hiệu quả về năng lượng).<br>B. energy-consuming (tốn năng lượng) - sai nghĩa 'save energy'.<br>D. energy-saved (sai ngữ pháp, thường dùng energy-saving)."
+        },
+        {
+            id: 12,
+            section: "",
+            question: "Cleaning up _____water sources is a challenging task.",
+            options: { A: "Contamination", B: "contaminated", C: "contaminate", D: "contaminating" },
+            correct: "B",
+            explanation: "<strong>Đáp án B (contaminated - Adj)</strong><br>Cấu trúc: Adj + Noun. Cần tính từ bổ nghĩa cho 'water sources'.<br>B. Contaminated (bị ô nhiễm).<br>Dịch: Làm sạch các nguồn nước bị ô nhiễm là một nhiệm vụ khó khăn."
+        },
+        
+        // READING GAP FILL 1
+        {
+            id: 13,
+            section: "Read the announcement and choose the correct option (13-16).",
+            passage: "MUZA MUSEUM\nThe exhibition here is based (13) ____ large models showing how living creatures (14) ____ their amazing skills in the wild. Dress up like (15) ____ jungle creature to discover how they deal with a (16) ____ environment. Or help build a model of an elephant!",
+            question: "Question 13:",
+            options: { A: "in", B: "around", C: "at", D: "behind" },
+            correct: "B",
+            explanation: "<strong>Đáp án B (around)</strong><br>Cụm từ: <strong>based around</strong> (tập trung xung quanh, lấy làm chủ đề chính).<br>Trong ngữ cảnh bảo tàng: Triển lãm được xây dựng xung quanh các mô hình lớn."
+        },
+        {
+            id: 14,
+            section: "",
+            question: "Question 14:",
+            options: { A: "used", B: "use", C: "using", D: "to use" },
+            correct: "B",
+            explanation: "<strong>Đáp án B (use)</strong><br>Cấu trúc: how + S (living creatures) + V (chia thì hiện tại đơn).<br>Dịch: ...cách mà các sinh vật sống <strong>sử dụng</strong> kỹ năng của chúng."
+        },
+        {
+            id: 15,
+            section: "",
+            question: "Question 15:",
+            options: { A: "a", B: "an", C: "the", D: "X" },
+            correct: "A",
+            explanation: "<strong>Đáp án A (a)</strong><br>Cụm danh từ: 'a jungle creature' (một sinh vật rừng - danh từ đếm được số ít, nhắc đến chung chung, bắt đầu bằng phụ âm 'j')."
+        },
+        {
+            id: 16,
+            section: "",
+            question: "Question 16:",
+            options: { A: "changer", B: "changing", C: "changed", D: "change" },
+            correct: "B",
+            explanation: "<strong>Đáp án B (changing)</strong><br>Cần tính từ bổ nghĩa cho 'environment'.<br><strong>changing environment</strong>: môi trường đang thay đổi (mang tính chủ động/tiếp diễn)."
+        },
+        
+        // REARRANGEMENT
+        {
+            id: 17,
+            section: "Mark the letter A, B, C or D to indicate the correct answer.",
+            question: "Arrange the sentences to make a meaningful paragraph:\na. The city was bustling with activity.\nb. I decided to visit the local museum\nc. After a day of exploration, I returned to my hotel, feeling content.\nd. I started my day with a hearty breakfast at a café near my hotel\ne. The museum had a fascinating collection of artifacts.",
+            options: { A: "d – a – b – e – c", B: "c – a – d – b – e", C: "a – d – b – e – c", D: "a – d – e – b – c" },
+            correct: "A",
+            explanation: "<strong>Đáp án A (d – a – b – e – c)</strong><br>Trình tự logic:<br>1. (d) Bắt đầu ngày mới với bữa sáng.<br>2. (a) Thấy thành phố nhộn nhịp.<br>3. (b) Quyết định đi thăm bảo tàng.<br>4. (e) Mô tả bảo tàng.<br>5. (c) Kết thúc ngày, về khách sạn."
+        },
+        {
+            id: 18,
+            section: "",
+            question: "Arrange the sentences to make a meaningful letter:\na. I hope this letter finds you well.\nb. I wanted to share some exciting news with you.\nc. I look forward to hearing from you soon.\nd. I have been promoted at work\ne. It’s been a challenging journey, but I’m thrilled about this new opportunity.\nf. Please write back when you get a chance.",
+            options: { A: "a-d-e-b-f-c", B: "a-b-e-d-f-c", C: "a-d-b-e-f-c", D: "a-b-d-e-f-c" },
+            correct: "D",
+            explanation: "<strong>Đáp án D (a-b-d-e-f-c)</strong><br>Trình tự thư:<br>1. (a) Chào hỏi (Hope this letter...).<br>2. (b) Mục đích viết thư (Share news).<br>3. (d) Tin tức cụ thể (Promoted).<br>4. (e) Cảm xúc chi tiết (Thrilled...).<br>5. (f) Nhắc viết lại.<br>6. (c) Kết thư."
+        },
+
+        // READING PASSAGE 2 (Light Pollution)
+        {
+            id: 19,
+            section: "Read the passage and choose the correct option (19-24).",
+            passage: "Light pollution is not (19) ____ serious as water or air pollution. Moreover, it is the type of pollution that (20) ____ more in cities than in rural areas. In the past, we could sit out at night and gaze at glittering stars in the sky and light from objects in the out space. Nowadays, cities are covered with lights from buildings, streets, advertising displays, many of which direct the lights up into the sky and into many unwanted places. The real problem is that it is very (21) ____ to apply light to almost everything at night. Millions of tons of oil and coal (22) ____ to produce the power to light the sky. Eye strain, loss of vision and stress are what people may get from light pollution. (23) ____ light at night can harm our eyes and also harm the hormones that help us (24) ____ things properly.",
+            question: "Question 19:",
+            options: { A: "more", B: "as", C: "much", D: "only" },
+            correct: "B",
+            explanation: "<strong>Đáp án B (as)</strong><br>Cấu trúc so sánh bằng phủ định: <strong>not as... as</strong> (không... bằng)."
+        },
+        {
+            id: 20,
+            section: "",
+            question: "Question 20:",
+            options: { A: "happen", B: "occur", C: "occurs", D: "is occurred" },
+            correct: "C",
+            explanation: "<strong>Đáp án C (occurs)</strong><br>Chủ ngữ 'type of pollution' (số ít) -> Động từ chia số ít 'occurs'. 'Occur' là nội động từ, không dùng bị động."
+        },
+        {
+            id: 21,
+            section: "",
+            question: "Question 21:",
+            options: { A: "waste", B: "wastes", C: "wasting", D: "wasteful" },
+            correct: "D",
+            explanation: "<strong>Đáp án D (wasteful)</strong><br>Cấu trúc: It is + very + Adj + to V.<br>Dịch: Thật là rất <strong>lãng phí</strong> (wasteful) khi thắp sáng mọi thứ..."
+        },
+        {
+            id: 22,
+            section: "",
+            question: "Question 22:",
+            options: { A: "used", B: "using", C: "is used", D: "are used" },
+            correct: "D",
+            explanation: "<strong>Đáp án D (are used)</strong><br>Câu bị động thì hiện tại đơn. Chủ ngữ 'Millions of tons...' (số nhiều) -> are used."
+        },
+        {
+            id: 23,
+            section: "",
+            question: "Question 23:",
+            options: { A: "Very much", B: "Too much", C: "So much", D: "So many" },
+            correct: "B",
+            explanation: "<strong>Đáp án B (Too much)</strong><br><strong>Too much light</strong> (quá nhiều ánh sáng - tiêu cực).<br>Lưu ý: Đề gốc có 2 đáp án trùng nhau, ở đây đã chỉnh lại để chọn B. 'Too much' đi với danh từ không đếm được (light)."
+        },
+        {
+            id: 24,
+            section: "",
+            question: "Question 24:",
+            options: { A: "to use", B: "useful", C: "used", D: "using" },
+            correct: "A",
+            explanation: "<strong>Đáp án A (to use)</strong><br>Trong ngữ cảnh: 'help us (to) use things properly' (giúp chúng ta sử dụng mọi thứ đúng cách - mắt nhìn rõ để dùng). Dù nghĩa hơi tối nghĩa nhưng ngữ pháp 'help sb (to) V' là phù hợp nhất trong các lựa chọn."
+        },
+
+        // CLOSEST MEANING & SENTENCE BUILDING
+        {
+            id: 25,
+            section: "Mark the letter A, B, C or D to indicate the sentence that is closest in meaning.",
+            question: "If we want to save the environment, we need to stop using so much energy.",
+            options: { 
+                A: "Using so much energy, we want to save the environment", 
+                B: "We need to stop using so much energy when we can save the environment", 
+                C: "We want to save the environment if we need to stop using so much energy", 
+                D: "We won’t save the environment unless we stop using so much energy." 
+            },
+            correct: "D",
+            explanation: "<strong>Đáp án D</strong><br>Cấu trúc câu điều kiện loại 1 biến đổi: 'If... not' = 'Unless'.<br>Nghĩa: Chúng ta sẽ không cứu được môi trường trừ khi chúng ta ngừng sử dụng quá nhiều năng lượng."
+        },
+        {
+            id: 26,
+            section: "",
+            question: "It was not until midnight that Mike stopped practising.",
+            options: { 
+                A: "Mike stopped practising before it was midnight.", 
+                B: "Mike only stopped practising before midnight.", 
+                C: "Mike stopped practising after midnight.", 
+                D: "I wanted Mike to stop practising before midnight." 
+            },
+            correct: "C",
+            explanation: "<strong>Đáp án C</strong><br>Cấu trúc: 'It was not until [Time] that...' (Mãi cho đến khi... thì mới...).<br>Nghĩa: Mãi đến nửa đêm Mike mới dừng tập. -> Tức là việc tập luyện kéo dài đến nửa đêm (và kết thúc lúc/sau mốc đó).<br>A, B sai vì nói dừng 'trước' nửa đêm."
+        },
+        {
+            id: 27,
+            section: "Mark the letter A, B, C or D to indicate the sentence that is made from the given cues.",
+            question: "Cues: Endangered animals/ wild/ face/ risk/ extinction.",
+            options: { 
+                A: "Endangered animals in the wild face risking of extinction.", 
+                B: "Endangered animals in the wild are facing a high risk of extinction.", 
+                C: "Endangered animals in the wild faces risk of extinction.", 
+                D: "Endangered animals from the wild are facing a risk of extinction." 
+            },
+            correct: "B",
+            explanation: "<strong>Đáp án B</strong><br>A sai: face risking (sai ngữ pháp, face the risk).<br>C sai: faces (Chủ ngữ số nhiều 'animals' không chia s).<br>D sai: from the wild (ít dùng, thường dùng 'in the wild').<br>B đúng nhất về ngữ pháp và collocation (face a high risk)."
+        },
+        {
+            id: 28,
+            section: "",
+            question: "Cues: I/ call/ you/ as soon as/ I/ arrive/ airport.",
+            options: { 
+                A: "I call you as soon as I arrive at the airport.", 
+                B: "I will call you as soon as I will arrive at the airport.", 
+                C: "I will call you as soon as I arrive at the airport.", 
+                D: "I would call you as soon as I arrive at the airport." 
+            },
+            correct: "C",
+            explanation: "<strong>Đáp án C</strong><br>Cấu trúc hòa hợp thì tương lai: Tương lai đơn (Main clause) + as soon as + Hiện tại đơn (Time clause).<br>Không dùng tương lai (will) trong mệnh đề thời gian."
+        },
+
+        // SIGNS
+        {
+            id: 29,
+            section: "Read the following sign or notice and mark the letter A, B, C or D.",
+            question: "What does the sign say?",
+            customContent: `<div class="sign-box"><div class="sign-title">QUIET ZONE</div><div class="sign-body">DO NOT DISTURB</div></div>`,
+            options: { 
+                A: "You can make noise and talk loudly in this area.", 
+                B: "This area is for quiet and no loud noises are allowed.", 
+                C: "Making noise is encouraged and allowed in this area.", 
+                D: "The area is not watched, so noise is not controlled." 
+            },
+            correct: "B",
+            explanation: "<strong>Đáp án B</strong><br>Biển báo: QUIET ZONE (Khu vực yên tĩnh) - DO NOT DISTURB (Không làm phiền).<br>-> Khu vực này cần sự yên tĩnh, không được gây ồn."
+        },
+        {
+            id: 30,
+            section: "",
+            question: "What does the notice say?",
+            customContent: `<div class="notice-box">"The garden is closed for planting.<br>Will be open to visitors next week"</div>`,
+            options: { 
+                A: "You can visit the garden any day, not just next week.", 
+                B: "The garden is open for planting and visitors are allowed in now.", 
+                C: "The garden is always open and is not closed for planting.", 
+                D: "The garden will be open after planting is completed." 
+            },
+            correct: "D",
+            explanation: "<strong>Đáp án D</strong><br>Thông báo: Vườn đang đóng cửa để trồng cây. Sẽ mở cửa vào tuần tới.<br>-> Suy ra: Vườn sẽ mở cửa sau khi việc trồng trọt hoàn tất (vào tuần sau)."
+        },
+
+        // READING PASSAGE 3 (Yellowstone)
+        {
+            id: 31,
+            section: "Read the passage and mark the letter A, B, C or D (31-36).",
+            passage: "Yellowstone National Park was established in 1872. Located in northwestern Wyoming and extending into Montana and Idaho, the park is known for its spectacular geysers, hot springs, canyons, and fossil forests. Yellowstone was the world's first national park. Yellowstone National Park encompasses a large area of unspoiled wilderness that is almost entirely forested. The most common tree is the lodgepole pine, but other varieties of pine, as well as spruce, fir, and juniper are also found in Yellowstone.\n\nThe park is one of the largest wildlife sanctuaries in the United States. Among the more than 300 animal species found here are grizzly bears, elk, deer, antelope, moose, bighorn sheep, coyotes, and lynx. During summer, thousands of wapiti, or American elk graze in the park. More than 1,300 bison, which almost became extinct in the park, roam the eastern sections. Wolves, once thought to be a menace, were reintroduced to the park in 1995 after being hunted and trapped to the brink of extinction early in the 20th century. Nearly 300 species of birds, including bald eagles, osprey, white pelicans, California gulls, and Canada geese, either live in or visit the park. The rare trumpeter swan also frequents the area and is protected within the park.",
+            question: "Question 31: What is the main idea of the passage?",
+            options: { 
+                A: "To discuss the dangers the flora of the park has to face.", 
+                B: "To discuss the dangers the fauna of the park has to face", 
+                C: "To show the bad condition of the park", 
+                D: "To give information about the park" 
+            },
+            correct: "D",
+            explanation: "<strong>Đáp án D</strong><br>Đoạn văn cung cấp thông tin tổng quan về Yellowstone (vị trí, lịch sử, thực vật, động vật). Không tập trung vào sự nguy hiểm hay tình trạng xấu."
+        },
+        {
+            id: 32,
+            section: "",
+            question: "Question 32: What do wapiti do during summer?",
+            options: { A: "They roam in the park", B: "They visit the park", C: "They graze in the park", D: "They frequent the park" },
+            correct: "C",
+            explanation: "<strong>Đáp án C</strong><br>Thông tin trong bài: 'During summer, thousands of wapiti, or American elk <strong>graze</strong> in the park.'"
+        },
+        {
+            id: 33,
+            section: "",
+            question: "Question 33: Which kind of animal almost became extinct early in the 20th century?",
+            options: { A: "Bison", B: "bald eagles", C: "trumpeter swan", D: "wolves" },
+            correct: "D",
+            explanation: "<strong>Đáp án D (Wolves)</strong><br>Thông tin: 'Wolves... were reintroduced... after being hunted and trapped to the brink of extinction early in the 20th century.'<br>Lưu ý: Bison cũng suýt tuyệt chủng nhưng bài viết nhấn mạnh 'early in the 20th century' gắn liền với câu về Sói (Wolves)."
+        },
+        {
+            id: 34,
+            section: "",
+            question: "Question 34: Which statement is NOT TRUE according to the passage?",
+            options: { 
+                A: "Yellowstone was established in 1872.", 
+                B: "Yellowstone was the world’s first national park", 
+                C: "Yellowstone is located totally in northwestern Wyoming.", 
+                D: "Yellowstone is famous for its spectacular geysers, hot springs, canyons and fossil forests." 
+            },
+            correct: "C",
+            explanation: "<strong>Đáp án C (Là câu SAI)</strong><br>Bài viết nói: 'Located in northwestern Wyoming and <strong>extending into Montana and Idaho</strong>'.<br>-> Nó không nằm hoàn toàn (totally) ở Wyoming."
+        },
+        {
+            id: 35,
+            section: "",
+            question: "Question 35: The word “encompasses” in paragraph 2 is CLOSEST in meaning to _____.",
+            options: { A: "Includes", B: "has", C: "contains", D: "surrounds" },
+            correct: "A",
+            explanation: "<strong>Đáp án A (Includes)</strong><br>Encompass = bao gồm, chứa đựng một phạm vi rộng. 'Includes' là từ đồng nghĩa sát nhất trong ngữ cảnh này."
+        },
+        {
+            id: 36,
+            section: "",
+            question: "Question 36: The word “unspoiled” in paragraph 2 is OPPOSITE in meaning to _____.",
+            options: { A: "Damaged", B: "protested", C: "protected", D: "established" },
+            correct: "A",
+            explanation: "<strong>Đáp án A (Damaged)</strong><br>Unspoiled = hoang sơ, nguyên vẹn, chưa bị hư hại.<br>Trái nghĩa là Damaged (bị phá hủy, hư hại)."
+        },
+
+        // GAP FILL (DINOSAURS) - SENTENCE INSERTION
+        {
+            id: 37,
+            section: "Four phrases/sentences have been removed. Mark the letter A, B, C or D to indicate the correct option.",
+            passage: "<strong>Options:</strong><br>A - farming are destroying the habitats of many species.<br>B - This collision sent dust and debris into the atmosphere which blocked sunlight from reaching the Earth’s surface.<br>C - and animal species are finding their habitats being destroyed<br>D - Therefore, more feasible and urgent actions should be taken.<br><br><strong>Text:</strong><br>About 65 million years ago, the dinosaurs became extinct. The hot, dry climate of the Cretaceous Period quickly changed as a result of an asteroid hitting the Earth. (37) _____. The dinosaurs could not quickly adapt to the Earth’s colder climate and eventually became extinct. While the dinosaurs are no longer with us, today a number of plant, insect, (38) _____, and they too are in danger of extinction. Human activities that are destructive to the environment such as the development of industry, housing, and (39)_____. For example, in the Amazon Rainforest, thousands of hectares of forest are being destroyed as trees are being cut down to make way for cattle farms, logging and housing. Scientists warn that many plant and animal species from this area of the world will become extinct soon unless we quickly stop destroying their habitats. (40) _____.",
+            question: "Question 37:",
+            options: { A: "A", B: "B", C: "C", D: "D" },
+            correct: "B",
+            explanation: "<strong>Đáp án B</strong><br>Câu trước nói về thiên thạch va vào Trái đất. Câu 37 giải thích hậu quả ngay sau đó: 'Vụ va chạm này gửi bụi vào khí quyển...' dẫn đến khí hậu lạnh hơn ở câu sau."
+        },
+        {
+            id: 38,
+            section: "",
+            question: "Question 38:",
+            options: { A: "A", B: "B", C: "C", D: "D" },
+            correct: "C",
+            explanation: "<strong>Đáp án C</strong><br>Liệt kê: 'plant, insect, [and animal species...]'<br>Câu đầy đủ: ...plant, insect, and animal species are finding their habitats being destroyed, and they too are in danger..."
+        },
+        {
+            id: 39,
+            section: "",
+            question: "Question 39:",
+            options: { A: "A", B: "B", C: "C", D: "D" },
+            correct: "A",
+            explanation: "<strong>Đáp án A</strong><br>Liệt kê các hoạt động con người: 'industry, housing, and [farming are destroying...]'.<br>Phần A hoàn thiện câu về mặt ngữ pháp và ý nghĩa."
+        },
+        {
+            id: 40,
+            section: "",
+            question: "Question 40:",
+            options: { A: "A", B: "B", C: "C", D: "D" },
+            correct: "D",
+            explanation: "<strong>Đáp án D</strong><br>Câu kết đoạn. Sau khi cảnh báo về sự tuyệt chủng, câu kết luận là: 'Vì vậy, cần có những hành động khả thi và cấp bách hơn.'"
+        }
+    ];
+
+    // Render Questions
+    const quizContainer = document.getElementById('quiz-container');
+
+    function renderQuiz() {
+        let currentSection = "";
+        
+        quizData.forEach((q, index) => {
+            // Render Section Title if it changes
+            if (q.section !== currentSection && q.section !== "") {
+                const sectionDiv = document.createElement('div');
+                sectionDiv.className = 'section-title';
+                sectionDiv.innerText = q.section;
+                quizContainer.appendChild(sectionDiv);
+                currentSection = q.section;
+            }
+
+            const card = document.createElement('div');
+            card.className = 'question-card';
+            card.id = `card-${q.id}`;
+
+            // Render Passage if present
+            if (q.passage) {
+                const passageDiv = document.createElement('div');
+                passageDiv.className = 'reading-passage';
+                passageDiv.innerHTML = q.passage.replace(/\n/g, '<br>');
+                card.appendChild(passageDiv);
+            }
+
+            // Question Text
+            const questionText = document.createElement('div');
+            questionText.className = 'question-text';
+            questionText.innerHTML = `${q.question}`;
+            card.appendChild(questionText);
+
+            // Custom Content (Images/Signs)
+            if (q.customContent) {
+                const customDiv = document.createElement('div');
+                customDiv.innerHTML = q.customContent;
+                customDiv.style.textAlign = 'center';
+                card.appendChild(customDiv);
+            }
+
+            // Options
+            const optionsGrid = document.createElement('div');
+            optionsGrid.className = 'options-grid';
+
+            for (const [key, value] of Object.entries(q.options)) {
+                const label = document.createElement('label');
+                label.className = 'option-label';
+                label.id = `label-${q.id}-${key}`;
+                
+                const input = document.createElement('input');
+                input.type = 'radio';
+                input.name = `question-${q.id}`;
+                input.value = key;
+                input.className = 'option-input';
+                
+                // Add event listener to remove error highlight on selection
+                input.onclick = () => {
+                   document.getElementById(`explanation-${q.id}`).style.display = 'none';
+                   label.parentNode.querySelectorAll('.option-label').forEach(l => {
+                       l.classList.remove('correct-answer', 'wrong-answer');
+                   });
+                };
+
+                label.appendChild(input);
+                label.insertAdjacentHTML('beforeend', `<strong>${key}.</strong>&nbsp;${value}`);
+                optionsGrid.appendChild(label);
+            }
+            card.appendChild(optionsGrid);
+
+            // Check Button (Individual)
+            const checkBtn = document.createElement('button');
+            checkBtn.className = 'btn';
+            checkBtn.innerText = 'Check Answer';
+            checkBtn.onclick = () => checkAnswer(q.id);
+            card.appendChild(checkBtn);
+
+            // Explanation Div
+            const explanationDiv = document.createElement('div');
+            explanationDiv.className = 'explanation';
+            explanationDiv.id = `explanation-${q.id}`;
+            explanationDiv.innerHTML = q.explanation;
+            card.appendChild(explanationDiv);
+
+            quizContainer.appendChild(card);
+        });
+    }
+
+    function checkAnswer(id) {
+        const q = quizData.find(item => item.id === id);
+        const selected = document.querySelector(`input[name="question-${id}"]:checked`);
+        const explanation = document.getElementById(`explanation-${id}`);
+        const allLabels = document.querySelectorAll(`#card-${id} .option-label`);
+
+        // Reset styles
+        allLabels.forEach(l => l.classList.remove('correct-answer', 'wrong-answer'));
+
+        if (!selected) {
+            alert("Please select an answer first!");
+            return;
+        }
+
+        const userVal = selected.value;
+        const correctLabel = document.getElementById(`label-${id}-${q.correct}`);
+        const selectedLabel = document.getElementById(`label-${id}-${userVal}`);
+
+        if (userVal === q.correct) {
+            selectedLabel.classList.add('correct-answer');
+            explanation.style.display = 'block';
+            explanation.style.backgroundColor = '#ecfdf5';
+            explanation.style.borderColor = '#10b981';
+            explanation.innerHTML = `<strong style="color:green">✓ Correct!</strong><br>` + q.explanation;
+        } else {
+            selectedLabel.classList.add('wrong-answer');
+            correctLabel.classList.add('correct-answer');
+            explanation.style.display = 'block';
+            explanation.style.backgroundColor = '#fef2f2';
+            explanation.style.borderColor = '#ef4444';
+            explanation.innerHTML = `<strong style="color:red">✗ Incorrect.</strong> The correct answer is <strong>${q.correct}</strong>.<br>` + q.explanation;
+        }
+    }
+
+    function submitAll() {
+        let score = 0;
+        let unanswered = 0;
+
+        quizData.forEach(q => {
+            const selected = document.querySelector(`input[name="question-${q.id}"]:checked`);
+            const explanation = document.getElementById(`explanation-${q.id}`);
+            const correctLabel = document.getElementById(`label-${q.id}-${q.correct}`);
+            
+            // Reset styles
+            document.querySelectorAll(`#card-${q.id} .option-label`).forEach(l => {
+                l.classList.remove('correct-answer', 'wrong-answer');
+            });
+
+            if (selected) {
+                if (selected.value === q.correct) {
+                    score++;
+                    selected.parentNode.classList.add('correct-answer');
+                    explanation.innerHTML = `<strong style="color:green">✓ Correct!</strong><br>` + q.explanation;
+                } else {
+                    selected.parentNode.classList.add('wrong-answer');
+                    correctLabel.classList.add('correct-answer');
+                    explanation.innerHTML = `<strong style="color:red">✗ Incorrect.</strong> The correct answer is <strong>${q.correct}</strong>.<br>` + q.explanation;
+                }
+            } else {
+                unanswered++;
+                correctLabel.classList.add('correct-answer'); // Highlight correct answer
+                explanation.innerHTML = `<strong style="color:#d97706">⚠ Not Answered.</strong> The correct answer is <strong>${q.correct}</strong>.<br>` + q.explanation;
+            }
+            
+            // Always show explanation on submit all
+            explanation.style.display = 'block';
+        });
+
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        // Show result modal
+        const modal = document.getElementById('resultModal');
+        const scoreDisplay = document.getElementById('score-display');
+        const scoreMessage = document.getElementById('score-message');
+
+        scoreDisplay.innerText = `${score}/${quizData.length}`;
+        
+        let msg = "";
+        if (score === 40) msg = "Excellent! Perfect Score!";
+        else if (score >= 30) msg = "Great job! Keep it up.";
+        else if (score >= 20) msg = "Good effort. Review the explanations to improve.";
+        else msg = "Don't give up! Study the explanations carefully.";
+
+        if (unanswered > 0) msg += `<br><br><small>(You left ${unanswered} questions unanswered)</small>`;
+
+        scoreMessage.innerHTML = msg;
+        modal.style.display = "block";
+    }
+
+    function closeModal() {
+        document.getElementById('resultModal').style.display = "none";
+    }
+
+    // Initialize
+    renderQuiz();
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+        const modal = document.getElementById('resultModal');
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+</body>
+</html>
